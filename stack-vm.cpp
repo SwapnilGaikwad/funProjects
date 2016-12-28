@@ -1,33 +1,22 @@
-#ifndef STACK_VM_H
-#define STACK_VM_H
+#include "stack-vm.h"
+/*
+ * Instruction format
+ * header: 2 bits
+ * data: 30 bits
+ * 
+ * header format:
+ * 0 => positive integer
+ * 1 => primitive instruction
+ * 2 => negative integer
+ * 3 => undefined
+ * */
 
-#include <iostream>
-#include <vector>
+//function definitions
+StackVM::StackVM() {
+    memory.reserve[1000000];
+}
 
-// type definitions
-typedef int32_t i32;
-
-class StackVM {
-    i32 pc = 100;	// Program counter
-    i32 sp = 0;		// Stack pointer
-    std::vector<i32> memory;
-    i32 typ = 0;
-    i32 dat= 0;
-    i32 running = 1;
-
-    // private functions
-    i32 getType(i32 instruction);
-    i32 getData(i32 instruction);
-    void fetch();
-    void decode();
-    void execute();
-    void doPrimitive();
-
-    public:
-    //public functions
-    StackVM();
-    void run();
-    void loadProgram(std::vector<i32> prog);
-};
-
-#endif
+i32 StackVM::getType(i32 instruction) {
+    i32 type = 0xc0000000;
+    type = (type & instruction) >> 30;
+}

@@ -75,13 +75,21 @@ void StackVM::doPrimitive() {
     }
 }
 
+void StackVM::printStack() {
+    std::cout << "Stack [ ";
+    for( int i = 0; i <= sp; i++) {
+        std::cout << memory[i] << " ";
+    }
+    std::cout << "]" << std::endl;
+}
+
 void StackVM::run() {
     pc -= 1;
     while(running == 1) {
        fetch();
        decode();
        execute();
-       std::cout << "Top of stack: " << memory[sp] << std::endl;
+       printStack();
     }
 }
 

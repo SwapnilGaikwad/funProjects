@@ -9,7 +9,7 @@ typedef int32_t i32;
 
 class StackVM {
     i32 pc = 100;	// Program counter
-    i32 sp = 0;		// Stack pointer
+    i32 sp = -1;	// Stack pointer
     std::vector<i32> memory;
     i32 typ = 0;
     i32 dat= 0;
@@ -22,6 +22,7 @@ class StackVM {
     void decode();
     void execute();
     void doPrimitive();
+    void printStack();
 
     public:
     //public functions

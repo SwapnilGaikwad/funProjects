@@ -48,13 +48,28 @@ void StackVM::execute() {
 
 void StackVM::doPrimitive() {
     switch(dat){
-        case 0: //halt
+        case 0: // halt
             std::cout << "halt"  << std::endl;
             running = 0;
             break;
-        case 1: //add
+        case 1: // add
             std::cout << "add " << memory[sp - 1] << " " << memory[sp] << std::endl;
-            memory[sp -1] = memory[sp - 1] + memory[sp];
+            memory[sp - 1] = memory[sp - 1] + memory[sp];
+            sp--;
+            break;
+        case 2: // sub
+            std::cout << "sub " << memory[sp - 1] << " " << memory[sp] << std::endl;
+            memory[sp - 1] = memory[sp - 1] - memory[sp];
+            sp--;
+            break;
+        case 3: // mul
+            std::cout << "mul " << memory[sp - 1] << " " << memory[sp] << std::endl;
+            memory[sp - 1] = memory[sp - 1] * memory[sp];
+            sp--;
+            break;
+        case 4: // div
+            std::cout << "div " << memory[sp - 1] << " " << memory[sp] << std::endl;
+            memory[sp - 1] = memory[sp - 1] / memory[sp];
             sp--;
             break;
     }

@@ -12,4 +12,4 @@ stack-vm.o: stack-vm.cpp stack-vm.h
 	$(CXX) $(CFLAGS) -c stack-vm.cpp
 
 clean:
-	rm -f *.o stack-vm
+	rm -f *.o stack-vm *.bin

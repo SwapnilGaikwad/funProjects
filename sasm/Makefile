@@ -12,4 +12,4 @@ sasm.o: sasm.cpp lexer.h
 	$(CXX) $(CFLAGS) -c sasm.cpp
 
 clean:
-	rm -f sams *.o *.bin
+	rm -f sasm *.o *.bin

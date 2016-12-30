@@ -63,6 +63,7 @@ vector<i32> compileToInstructions(strings s){
             }
         }
     }
+    instructions.push_back(0x40000000); //Add halt instruction
     return instructions;
 }
 

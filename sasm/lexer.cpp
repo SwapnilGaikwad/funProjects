@@ -18,7 +18,8 @@ strings Lexer::lex(std::string s){
             } else if (isgroup(s[i])){
                 if(s[i] == '"') {
                     lexeme[j] = s[i];
-                    i++; j++;
+                    i++;
+                    j++;
                 }
                 state = READBLOCK;
             } else if (s[i] == '/' && s[i + 1] == '/') {
@@ -35,33 +36,38 @@ strings Lexer::lex(std::string s){
                 i += 2;
             } else if (isgroup(s[i])) {
                 if (s[i] == '"'){
-                    lexeme[j] = s[j];
-                    i++; j++;
+                    lexeme[j] = s[i];
+                    i++;
+                    j++;
                 }
                 state = READBLOCK;
             } else if (isspecial(s[i])) {
-                if(i == 0) {
+                if(j == 0) {
                     lexeme[j] = s[i];
-                    i++; j++;
+                    i++;
+                    j++;
                 }
                 state = DUMP;
-            } else if (s[i] == '/' && s[i+1] == '/') {
+            } else if (s[i] == '/' && s[i + 1] == '/') {
                 i += 2;
                 state = COMMENT;
             } else {
                 lexeme[j] = s[i];
-                i++; j++
+                i++;
+                j++;
             }
             break;
         case READBLOCK:
             if (s[i] == beg_char && s[i] != '"') {
                 balance++;
                 lexeme[j] = s[i];
-                i++; j++;
+                i++;
+                j++;
             } else if(s[i] == end_char) {
                 balance--;
                 lexeme[j] = s[i];
-                i++; j++;
+                i++;
+                j++;
                 if (balance <= 0) {
                     state = DUMP;
                 }
@@ -70,18 +76,19 @@ strings Lexer::lex(std::string s){
                 i += 2;
             } else {
                 lexeme[j] = s[i];
-                i++; j++;
+                i++;
+                j++;
             }
             break;
         case SKIP:
             if (my_isspace(s[i])) {
                 i++;
             } else {
-                state = READHAR;
+                state = READCHAR;
             }
             break;
         case DUMP:
-            if (j < 0) {
+            if (j > 0) {
                 lexeme[j] = 0;
                 strlst.push_back(lexeme);
                 j=0;
@@ -131,6 +138,8 @@ bool Lexer::isgroup(char c) {
         case '(':
             end_char = ')';
             return true;
+        case ')':
+            return true;
         default:
             return false;
     }
@@ -139,7 +148,7 @@ bool Lexer::isgroup(char c) {
 bool Lexer::isspecial(char c) {
     switch(c) {
         case '[':
-        case '[':
+        case ']':
             return true;
         default:
             return false;

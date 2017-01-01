@@ -7,3 +7,9 @@ make
 
 ##Test the code
 make test
+
+# funPypyVM
+Based on https://www.youtube.com/watch?v=5U__sbjazPc
+
+##Building pypy
+http://doc.pypy.org/en/latest/build.html

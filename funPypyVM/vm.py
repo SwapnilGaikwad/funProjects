@@ -2,13 +2,14 @@ import sys
 
 '''
 00 - End of the program
-01 - End of instruction
 02 - Push
 03 - Pop
 04 - Print
 05 - Add
 06 - Subtract
 '''
+
+stack = []
 
 OP_EOP	= "00"
 OP_EOI	= "01"
@@ -25,23 +26,27 @@ def load_program(argv):
    prog.close()
    return lines
 
-def do_EOI():
-   print "EOI"
-
-def do_PUSH():
-   print "PUSH"
+def do_PUSH(i, lines):
+   toPush = int(lines[i + 1], 16)
+   stack.append(toPush)
 
 def do_POP():
-   print "POP"
+   return stack.pop()
 
 def do_PRINT():
-   print "PRINT"
+   print stack
 
 def do_ADD():
-   print "ADD"
+   num1 = stack.pop()
+   num2 = stack.pop()
+   total = num1 + num2
+   stack.append(total)
 
 def do_SUB():
-   print "SUB"
+   num1 = stack.pop()
+   num2 = stack.pop()
+   total = num1 - num2
+   stack.append(total)
 
 def execute_program(lines):
    loop = 1
@@ -50,11 +55,8 @@ def execute_program(lines):
       instruction = lines[i]
       if instruction == OP_EOP:
          loop = 0
-         print "EOP"
-      elif instruction == OP_EOI:
-         do_EOI()
       elif instruction == OP_PUSH:
-         do_PUSH()
+         do_PUSH(i, lines)
       elif instruction == OP_POP:
          do_POP()
       elif instruction == OP_PRINT:

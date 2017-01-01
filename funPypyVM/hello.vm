@@ -1,0 +1,7 @@
+00 - End of the program
+01 - End of instruction
+02 - Push
+03 - Pop
+04 - Print
+05 - Add
+06 - Subtract

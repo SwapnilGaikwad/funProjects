@@ -37,7 +37,7 @@ def do_PUSH(i, lines):
 def do_POP():
    return stack.pop()
 
-def do_PRINT():
+def do_PRINT(stack):
    print stack
 
 def do_ADD():
@@ -77,7 +77,7 @@ def execute_program(lines):
       elif instruction == OP_POP:
          do_POP()
       elif instruction == OP_PRINT:
-         do_PRINT()
+         do_PRINT(stack)
       elif instruction == OP_ADD:
          do_ADD()
       elif instruction == OP_SUB:

@@ -7,6 +7,8 @@ import sys
 04 - Print
 05 - Add
 06 - Subtract
+07 - Mul
+08 - Div
 '''
 
 stack = []
@@ -18,6 +20,8 @@ OP_POP	= "03"
 OP_PRINT= "04"
 OP_ADD	= "05"
 OP_SUB	= "06"
+OP_MUL	= "07"
+OP_DIV	= "08"
 
 def load_program(argv):
    prog = open(argv)
@@ -48,6 +52,19 @@ def do_SUB():
    total = num1 - num2
    stack.append(total)
 
+def do_MUL():
+   num1 = stack.pop()
+   num2 = stack.pop()
+   total = num1 * num2
+   stack.append(total)
+
+def do_DIV():
+   num1 = stack.pop()
+   num2 = stack.pop()
+   total = num1 / num2
+   stack.append(total)
+
+
 def execute_program(lines):
    loop = 1
    i = 0
@@ -65,6 +82,10 @@ def execute_program(lines):
          do_ADD()
       elif instruction == OP_SUB:
          do_SUB()
+      elif instruction == OP_MUL:
+         do_MUL()
+      elif instruction == OP_DIV:
+         do_DIV()
       i+=1
 
 def run_program(argv):
